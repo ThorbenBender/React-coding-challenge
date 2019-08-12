@@ -38,22 +38,34 @@ export default class Create extends Component {
         }
         // call the function from the parent element with user object
         this.props.createUser(user)
+        // call the changeView function
+        this.changeView()
+    }
+    changeView = () => {
         // change the view to ViewAndUpdate
         this.props.changeView('ViewAndUpdate')
     }
     render() {
+        let style = {width: '50%'}
         return (
-            <div>
-                <input name='name' type='text' value={this.state.name} placeholder="Name..." onChange={this.handleInput} />
-                <input name='email' type='email' value={this.state.email} placeholder="Email..." onChange={this.handleInput} />
-                <select name='gender' onClick={this.handleInput}>
+            <div style={{display: 'flex', flexDirection: 'column', width: '50%',margin: '0 auto', marginTop: '20%'}}>
+                {/* input to get the name of the user  */}
+                <input name='name' type='text' value={this.state.name} placeholder="Name..." onChange={this.handleInput} style={style}/>
+                {/* input to get the email of the user */}
+                <input name='email' type='email' value={this.state.email} placeholder="Email..." onChange={this.handleInput} style={style}/>
+                {/* dropdown menu to get the gender of the user */}
+                <select name='gender' onClick={this.handleInput} style={style}>
                     <option defaultValue='select a gender'>Select a gender</option>
                     <option value='male'>Male</option>
                     <option value='female'>Female</option>
                     <option value='other'>other</option>
                 </select>
                 {this.state.error && <p>{this.state.error}</p>}
-                <button onClick={this.submitInput}>Submit</button>
+                {/* button to create a new user */}
+                <button onClick={this.submitInput} style={style}>Submit</button>
+                {/* you can cancel creating a user */}
+                {/* will return you to ViewAndUpdate Component */}
+                <button onClick={this.changeView} style={style}>Cancel</button>
             </div>
         )
     }

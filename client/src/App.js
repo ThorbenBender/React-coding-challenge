@@ -23,17 +23,24 @@ class App extends Component {
     this.setState(st => ({users: [...st.users, user]}))
   }
   editUser = (user) => {
+    // creates a new array 
     let newUsers = this.state.users.map(u => {
+      // changes the user with the same id as the id of the user we pass in
       if (u.id === user.id) {
+        // set u to user
         u = user
       }
+      // pass in the user in the new array
       return u
     })
+    // set the state to the new array
     this.setState({users: newUsers})
   }
 
   deleteUser = id => {
+    // pass only the users in the array who don't have the same id as the user we pass in
     let newUsers = this.state.users.filter(user => user.id !== id)
+    // assign the new array to users
     this.setState({users: newUsers})
   }
   render() {
