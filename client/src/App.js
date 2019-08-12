@@ -10,7 +10,7 @@ class App extends Component {
   state = {
     // show the current component
     view: 'Create',
-    user: []
+    users: []
   }
 
   changeView = view => {
@@ -20,7 +20,7 @@ class App extends Component {
   // takes in a user as an argument
   createUser = user => {
     // it will create a new array and fill in every user from the previous state and add the new user to the end
-    this.setState(st => ({user: [...st.user, user]}))
+    this.setState(st => ({users: [...st.users, user]}))
   }
   render() {
     return (
@@ -28,7 +28,7 @@ class App extends Component {
         {/* If view is equal to Create it will render the create component */}
         {this.state.view === 'Create' && <Create changeView={this.changeView} createUser={this.createUser} />}
         {/* If view is equal to ViewAndUpdate it will render the ViewAndUpdate component */}
-        {this.state.view === 'ViewAndUpdate' && <ViewAndUpdate changeView={this.changeView}/>}
+        {this.state.view === 'ViewAndUpdate' && <ViewAndUpdate changeView={this.changeView} users={this.state.users}/>}
       </div>
     );
   }

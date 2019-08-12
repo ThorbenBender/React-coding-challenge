@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+// import uuid
+import uuid from 'uuid'
+
 export default class Create extends Component {
     // state to store data from the input fields
     state = {
@@ -30,7 +33,8 @@ export default class Create extends Component {
         let user = {
             name: this.state.name,
             email: this.state.email,
-            gender: this.state.gender
+            gender: this.state.gender,
+            id: uuid()
         }
         // call the function from the parent element with user object
         this.props.createUser(user)
