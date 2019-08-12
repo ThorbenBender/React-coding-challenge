@@ -8,20 +8,22 @@ export default class ViewAndUpdate extends Component {
         showUser: ''
     }
     showUser = e => {
-        let user = this.props.users.filter(user => user.id === e.target.id)
-        this.setState({showUser: user[0]})
+        this.setState({showUser: e.target.id})
+    }
+    deleteUser = id => {
+        this.props.deleteUser(id)
+        this.setState({showUser: ''})
     }
     render() {
         return (
             <div>
                 <div>
-                    Navbar
                     <ul style={{listStyleType: 'none'}}>
                         {this.props.users.map((user, idx) => <li key={idx} id={user.id} onClick={this.showUser}>{user.name}</li>)}
                     </ul>
                 </div>
                 <div>
-                    {this.state.showUser && <UserScreen user={this.state.showUser}/>}
+                    {this.state.showUser && <UserScreen id={this.state.showUser} users={this.props.users} editUser={this.props.editUser} deleteUser={this.deleteUser}/>}
                 </div>
             </div>
         )

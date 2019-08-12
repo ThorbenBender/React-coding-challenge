@@ -22,13 +22,27 @@ class App extends Component {
     // it will create a new array and fill in every user from the previous state and add the new user to the end
     this.setState(st => ({users: [...st.users, user]}))
   }
+  editUser = (user) => {
+    let newUsers = this.state.users.map(u => {
+      if (u.id === user.id) {
+        u = user
+      }
+      return u
+    })
+    this.setState({users: newUsers})
+  }
+
+  deleteUser = id => {
+    let newUsers = this.state.users.filter(user => user.id !== id)
+    this.setState({users: newUsers})
+  }
   render() {
     return (
       <div className="App">
         {/* If view is equal to Create it will render the create component */}
         {this.state.view === 'Create' && <Create changeView={this.changeView} createUser={this.createUser} />}
         {/* If view is equal to ViewAndUpdate it will render the ViewAndUpdate component */}
-        {this.state.view === 'ViewAndUpdate' && <ViewAndUpdate changeView={this.changeView} users={this.state.users}/>}
+        {this.state.view === 'ViewAndUpdate' && <ViewAndUpdate changeView={this.changeView} users={this.state.users} editUser={this.editUser} deleteUser={this.deleteUser}/>}
       </div>
     );
   }
